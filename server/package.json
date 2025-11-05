@@ -1,0 +1,33 @@
+{
+  "name": "nextgen-health-server",
+  "version": "1.0.0",
+  "description": "NextGen Health Smart Care Backend API (Node + Express + SQLite + Twilio)",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "seed": "node db.js",
+    "test": "mocha --exit"
+  },
+  "dependencies": {
+    "better-sqlite3": "^8.7.0",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "twilio": "^5.10.4",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.1.7",
+    "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "Thapar College Project - NextGen Health Smart Care",
+  "license": "MIT"
+}

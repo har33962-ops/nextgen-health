@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" aria-labelledby="title desc" role="img">
+  <title id="title">NextGen Health illustration</title>
+  <desc id="desc">Stylized healthcare/telehealth illustration with doctor, patient device and UI elements using blue accent color.</desc>
+
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0f5ff"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+
+    <linearGradient id="accentGrad" x1="0" x2="1">
+      <stop offset="0%" stop-color="#3751ff"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="30" flood-color="#0b1220" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="800" fill="url(#bgGrad)"/>
+
+  <!-- decorative blobs -->
+  <g opacity="0.9">
+    <ellipse cx="920" cy="160" rx="220" ry="120" fill="#E8EEFF" />
+    <ellipse cx="220" cy="640" rx="300" ry="140" fill="#EEF2FF" />
+  </g>
+
+  <!-- centered UI card -->
+  <g transform="translate(160,140)" filter="url(#softShadow)">
+    <rect x="60" y="30" width="660" height="420" rx="22" fill="#ffffff"/>
+    <!-- top bar -->
+    <rect x="80" y="54" width="620" height="14" rx="7" fill="#f4f8ff"/>
+    <!-- left content (doctor/patient scene) -->
+    <g transform="translate(90,86)">
+      <!-- tablet / device -->
+      <rect x="0" y="20" width="220" height="300" rx="18" fill="#F8FAFF" stroke="#eef3ff"/>
+      <rect x="18" y="36" width="184" height="110" rx="12" fill="url(#accentGrad)" opacity="0.12"/>
+      <rect x="18" y="160" width="184" height="20" rx="8" fill="#eef6ff"/>
+      <rect x="18" y="190" width="120" height="16" rx="8" fill="#eef6ff"/>
+
+      <!-- doctor illustration (simple stylized figure) -->
+      <g transform="translate(260,0)">
+        <!-- body -->
+        <rect x="0" y="80" width="160" height="180" rx="40" fill="#F3F6FF"/>
+        <!-- coat -->
+        <path d="M20 120 q70 -40 120 0 v120 q0 20 -20 20 h-80 q-20 0 -20 -20 z" fill="#ffffff" stroke="#e6eefc"/>
+        <!-- head circle -->
+        <circle cx="80" cy="46" r="36" fill="#FFEFD9"/>
+        <!-- hair -->
+        <path d="M56 36 q24 -28 48 0 q-12 -10 -48 0 z" fill="#1f2937" opacity="0.06"/>
+        <!-- stethoscope -->
+        <path d="M120 150 q30 10 30 40" stroke="#94A3FF" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <circle cx="120" cy="196" r="8" fill="#94A3FF"/>
+      </g>
+
+      <!-- small patient bubble -->
+      <g transform="translate(460,18)">
+        <rect x="0" y="30" width="120" height="140" rx="14" fill="#FBFDFF" stroke="#eef3ff"/>
+        <circle cx="60" cy="62" r="22" fill="#FFD7E0"/>
+        <rect x="26" y="100" width="68" height="12" rx="8" fill="#f1f5ff"/>
+        <rect x="26" y="122" width="36" height="10" rx="6" fill="#f1f5ff"/>
+      </g>
+    </g>
+
+    <!-- right-side stats / small UI -->
+    <g transform="translate(420,110)">
+      <rect x="0" y="0" width="220" height="64" rx="12" fill="#fff" stroke="#eef3ff"/>
+      <text x="18" y="28" font-family="Inter, Arial, sans-serif" font-size="13" fill="#6b7280">Appointments</text>
+      <text x="18" y="48" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#0f1724">12 today</text>
+
+      <rect x="0" y="86" width="220" height="64" rx="12" fill="#fff" stroke="#eef3ff"/>
+      <text x="18" y="108" font-family="Inter, Arial, sans-serif" font-size="13" fill="#6b7280">Messages</text>
+      <text x="18" y="132" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#0f1724">3 unread</text>
+
+      <rect x="0" y="172" width="220" height="64" rx="12" fill="url(#accentGrad)" opacity="0.95" />
+      <text x="18" y="196" font-family="Inter, Arial, sans-serif" font-size="13" fill="#ffffff">Quick Action</text>
+      <text x="18" y="220" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#ffffff">Request Appointment</text>
+    </g>
+  </g>
+
+  <!-- floating icons and heart -->
+  <g transform="translate(900,500)">
+    <g transform="translate(-60,-60)">
+      <rect x="0" y="0" width="140" height="90" rx="18" fill="#fff" stroke="#eef3ff" filter="url(#softShadow)"/>
+      <text x="20" y="24" font-family="Inter, Arial" font-size="13" fill="#6b7280">Doctor notes</text>
+      <circle cx="30" cy="58" r="12" fill="#FEE2E2"/>
+      <path d="M24 58 l6 6 l12 -12" stroke="#ef4444" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <g transform="translate(60,-140)">
+      <rect x="0" y="0" width="120" height="120" rx="18" fill="white" stroke="#eef3ff" filter="url(#softShadow)"/>
+      <path d="M60 30 a18 18 0 1 1 0 36 a18 18 0 1 1 0 -36" fill="url(#accentGrad)"/>
+      <text x="18" y="95" font-family="Inter, Arial" font-size="12" fill="#6b7280">Telehealth</text>
+    </g>
+  </g>
+
+  <!-- big decorative heart + pulse -->
+  <g transform="translate(820,200)">
+    <path d="M30 70 C30 45 60 40 60 58 C60 40 90 45 90 70 C90 110 60 125 60 125 C60 125 30 110 30 70 Z" fill="#FFEFF4" stroke="#ff7ab6"/>
+    <path d="M18 95 L36 95 L44 80 L64 110 L80 90 L98 90" fill="none" stroke="#ff7ab6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- small logo text -->
+  <g transform="translate(640,48)">
+    <rect x="0" y="0" width="54" height="38" rx="10" fill="url(#accentGrad)"/>
+    <text x="27" y="26" font-family="Inter, Arial" font-size="14" fill="white" font-weight="700" text-anchor="middle">NG</text>
+  </g>
+</svg>
