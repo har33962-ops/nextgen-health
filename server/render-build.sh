@@ -1,4 +1,7 @@
+#!/usr/bin/env bash
+# Render build script — compiles native modules like better-sqlite3 from source
+
 set -e
-apt-get update
-apt-get install -y python3 make g++
-npm install
+echo "⚙️  Installing dependencies (build-from-source)..."
+npm install --build-from-source
+echo "✅ Build complete."
