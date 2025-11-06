@@ -11,17 +11,25 @@ import Projects from "./pages/Projects";
 import Resources from "./pages/Resources";
 import Profile from "./pages/Profile";
 
-/* ✅ FIX: Explicitly point API to your backend */
+/* ============================
+   API client (points to backend)
+   ============================ */
+
+// Prefer Render environment variable at build time; fallback to deployed backend.
+const API_URL =
+  (typeof process !== "undefined" && process.env.REACT_APP_API_URL) ||
+  "https://nextgen-health-backend.onrender.com";
+
+// Make sure axios instance uses that baseURL so built bundle contains the URL.
 const api = axios.create({
-  baseURL:
-    process.env.REACT_APP_API_URL ||
-    (window.location.hostname === "localhost"
-      ? "http://localhost:4000"
-      : "https://your-deployed-backend-url.com"),
-  timeout: 8000,
+  baseURL: API_URL,
+  timeout: 10000,
 });
 
-/* ---------- Navbar ---------- */
+// Alias in case older code refers to "Id"
+const Id = api;
+
+/* ---------- Topbar ---------- */
 function Topbar({ user, setUser }) {
   return (
     <motion.header
@@ -41,7 +49,6 @@ function Topbar({ user, setUser }) {
 
         <nav className="nav">
           <Link to="/">Home</Link>
-          <Link to="/dashboard">Patient</Link>
           <Link to="/projects">Projects</Link>
           <Link to="/resources">Resources</Link>
           <Link to="/profile">Profile</Link>
@@ -63,25 +70,47 @@ function Topbar({ user, setUser }) {
   );
 }
 
-/* ---------- HOME PAGE ---------- */
+/* ---------- Home (contains registration form) ---------- */
 function Home({ onRegister, setUser }) {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [contact, setContact] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Submit handler: posts to backend /api/register (uses api instance above)
   async function submit(e) {
     e.preventDefault();
-    if (!name || !contact) return alert("Enter name and contact");
+    if (!name || !contact) {
+      return alert("Please enter name and contact.");
+    }
+
+    setLoading(true);
     try {
-      const res = await api.post("/api/patients", { name, age, contact });
-      setUser(res.data);
-      localStorage.setItem("demo_user", JSON.stringify(res.data));
-      onRegister(res.data);
-      navigate("/dashboard");
+      // NOTE: backend endpoint used here is /api/register
+      const res = await api.post("/api/register", { name, age: Number(age || 0), contact });
+      const data = res.data;
+
+      // success handling
+      alert("✅ Registration successful!");
+      console.log("Register response:", data);
+
+      // persist user locally and update parent
+      localStorage.setItem("demo_user", JSON.stringify(data));
+      setUser(data);
+      if (typeof onRegister === "function") onRegister(data);
+
+      // navigate to dashboard (if exists)
+      navigate("/profile");
     } catch (err) {
-      console.error(err);
-      alert("Failed to register — check server connection.");
+      console.error("Register error:", err?.response?.data ?? err.message ?? err);
+      const msg =
+        err?.response?.data?.error ||
+        err?.response?.data?.message ||
+        (err.message ? String(err.message) : "Server or network error");
+      alert("❌ Failed to register — " + msg);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -98,8 +127,8 @@ function Home({ onRegister, setUser }) {
             NextGen Health — <span className="accent">Smart Care</span>
           </h1>
           <p className="lead">
-            A telehealth and clinic management demo for Thapar College —
-            appointments, doctor notes, analytics & project ideas — all in one modern web portal.
+            A telehealth and clinic management demo for Thapar College — appointments,
+            doctor notes, analytics & project ideas — all in one modern web portal.
           </p>
 
           <div className="stats-row">
@@ -146,7 +175,9 @@ function Home({ onRegister, setUser }) {
             <input placeholder="Full name" value={name} onChange={(e) => setName(e.target.value)} />
             <input placeholder="Age" value={age} onChange={(e) => setAge(e.target.value)} />
             <input placeholder="Contact (e.g. +91...)" value={contact} onChange={(e) => setContact(e.target.value)} />
-            <button className="btn full">Register & Try</button>
+            <button className="btn full" type="submit" disabled={loading}>
+              {loading ? "Registering..." : "Register & Try"}
+            </button>
           </form>
           <small className="muted">
             Used for demo only — no real data is sent off your machine.
